@@ -1,3 +1,4 @@
+import org.gradle.internal.impldep.org.fusesource.jansi.AnsiRenderer.test
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -14,8 +15,11 @@ repositories {
 
 dependencies {
     compile(kotlin("stdlib-jdk8"))
-    testCompile("junit", "junit", "4.12")
+    testCompile ( "com.natpryce.hamkrest:1.6.0.0")
+    testCompile("org.junit.jupiter:junit-jupiter-api:5.3.1")
 }
+
+
 
 configure<JavaPluginConvention> {
     sourceCompatibility = JavaVersion.VERSION_1_8

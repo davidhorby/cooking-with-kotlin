@@ -1,7 +1,6 @@
 package com.dhorby.kotlin.cooking.domain
 
-import com.dhorby.kotlin.cooking.domain.BakedDish.BakedPotato
-import com.dhorby.kotlin.cooking.domain.BakedDish.BakedPotatoWithCheese
+import com.dhorby.kotlin.cooking.domain.BakedDish.*
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
@@ -56,6 +55,13 @@ class DishesTest() {
         }
 
         @Test
+        fun `it should be possible to bake a potato with beans`() {
+            val dish = Dish() containing Potato and Beans
+            val cookedDish = dish `cook at` 200 degrees Centigrade
+            assertTrue(cookedDish is BakedPotatoWithBeans)
+        }
+
+        @Test
         fun `it should be possible to bake a potato with cheese and beans`() {
             val dish = Dish() containing Potato and Cheese and Beans
             val cookedDish = dish `cook at` 200 degrees Centigrade
@@ -63,11 +69,6 @@ class DishesTest() {
         }
 
     }
-
-
-
-
-
 
 }
 

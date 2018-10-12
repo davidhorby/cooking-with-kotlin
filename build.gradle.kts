@@ -11,9 +11,13 @@ version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
+    maven { setUrl("http://dl.bintray.com/kotlin/kotlin-eap-1.1") }
 }
 
 dependencies {
+    compile("org.jetbrains.kotlin:kotlin-stdlib:1.1.0")
+    compile("org.jetbrains.kotlinx:kotlinx-coroutines-core:0.30.2")
+    compile("org.jetbrains.kotlin:kotlin-gradle-plugin:1.1.0")
     compile(kotlin("stdlib-jdk8"))
     testCompile ( "com.natpryce.hamkrest:1.6.0.0")
     testCompile("org.junit.jupiter:junit-jupiter-api:5.3.1")

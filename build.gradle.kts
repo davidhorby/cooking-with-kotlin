@@ -1,4 +1,4 @@
-import org.gradle.internal.impldep.org.fusesource.jansi.AnsiRenderer.test
+
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -19,10 +19,8 @@ dependencies {
     compile("org.jetbrains.kotlinx:kotlinx-coroutines-core:0.30.2")
     compile("org.jetbrains.kotlin:kotlin-gradle-plugin:1.1.0")
     compile(kotlin("stdlib-jdk8"))
-    testCompile ( "com.natpryce.hamkrest:1.6.0.0")
     testCompile("org.junit.jupiter:junit-jupiter-api:5.3.1")
 }
-
 
 
 configure<JavaPluginConvention> {

@@ -25,14 +25,14 @@ class DishesTest() {
         }
 
         @Test
-        fun `it should be possible to create a potato with cheese dish` () {
+        fun `it should be possible to create a potato with cheese dish`() {
             val dishUnderTest = Dish() containing Ingredient.Potato and Ingredient.Cheese
             assertTrue(dishUnderTest is PotatoDish)
             assertTrue(dishUnderTest is PotatoWithCheese)
         }
 
         @Test
-        fun `it should not be possible to create dish with just cheese` () {
+        fun `it should not be possible to create dish with just cheese`() {
             val dishUnderTest = Dish() containing Ingredient.Cheese
             assertTrue(dishUnderTest is NotADish)
         }
@@ -68,6 +68,16 @@ class DishesTest() {
             assertTrue(cookedDish is BakedDish.BakedPotatoWithCheeseAndBeans, "The class is not BakedPotatoWithCheeseAndBeans but is ${cookedDish.javaClass}")
         }
 
+    }
+
+    @Nested
+    @DisplayName("Actions")
+    inner class Actons {
+        @Test
+        fun `it should be possible to bake a potato`() {
+            val cookedDish = Dish() containing Potato `cook at` 200 degrees Centigrade `in the oven for` 20 `minutes` 20
+            assertTrue(cookedDish is BakedPotato)
+        }
     }
 
 }

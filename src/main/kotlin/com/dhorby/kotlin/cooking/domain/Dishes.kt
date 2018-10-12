@@ -81,6 +81,14 @@ infix fun Dish.`cook at`(temp: Int):Dish {
     return this
 }
 
+infix fun Dish.`minutes`(temp: Int):Dish {
+    return this
+}
+
+infix fun Dish.`in the oven for`(timeInSeconds: Int):Dish {
+    return this
+}
+
 private fun containsCheese(dish:Dish) {
     dish.ingredients.contains(Ingredient.Cheese)
 }

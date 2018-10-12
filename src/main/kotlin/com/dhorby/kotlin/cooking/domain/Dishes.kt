@@ -10,9 +10,10 @@ open class Dish {
 
 
 sealed class PotatoDish : Dish()
-    class BakedPotatoWithCheese : PotatoDish()
-    class BakedPotatoWithBeans() : PotatoDish()
-    class BakedPotatoWithCheeseAndBeans() : PotatoDish()
+    open class SimplePotato : PotatoDish()
+    open class PotatoWithCheese : PotatoDish()
+    class PotatoWithBeans() : PotatoDish()
+    class PotatoWithCheeseAndBeans() : PotatoDish()
 
 sealed class MexicanDish(): Dish()
     data class Burrito(val cheese:Cheese): MexicanDish() {
@@ -21,8 +22,7 @@ sealed class MexicanDish(): Dish()
     }
     class Fajita() : MexicanDish()
 
-object NotADish : Dish()
-class RealPotatoDish:PotatoDish()
+class NotADish : Dish()
 
 
 sealed class Cheese
@@ -38,9 +38,29 @@ enum class Ingredient {
 // Infix functions
 infix fun Dish.containing(ingredient: Ingredient):Dish {
     this.ingredients.add(ingredient)
+    return getNewDish(this, ingredient)
+}
+
+
+
+//if (ingredients.contains(Ingredient.Potato)
+
+infix fun Dish.and(ingredient: Ingredient):Dish {
+    this.ingredients.add(ingredient)
+    return getNewDish(this, ingredient)
+}
+
+private fun getNewDish(dish:Dish, ingredient: Ingredient): Dish {
     val result: Dish = when (ingredient) {
-        Ingredient.Potato -> RealPotatoDish()
-        Ingredient.Cheese -> TODO()
+        Ingredient.Potato -> SimplePotato()
+        Ingredient.Cheese -> {
+            when (dish) {
+                is PotatoDish -> PotatoWithCheese()
+                else -> {
+                    NotADish()
+                }
+            }
+        }
         Ingredient.Beans -> TODO()
         Ingredient.Avocado -> TODO()
         Ingredient.Lettuce -> TODO()

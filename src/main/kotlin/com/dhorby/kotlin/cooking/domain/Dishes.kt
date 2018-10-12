@@ -1,70 +1,114 @@
 package com.dhorby.kotlin.cooking.domain
 
-open class Dish {
-    val ingredients = mutableSetOf<Ingredient>()
+import com.dhorby.kotlin.cooking.domain.BakedDish.*
+import com.dhorby.kotlin.cooking.domain.PotatoDish.*
+import com.dhorby.kotlin.cooking.domain.PotatoDish.SimplePotato
+
+open class Dish(open val ingredients:Set<Ingredient>) {
+    constructor() : this(mutableSetOf<Ingredient>())
 
     override fun toString(): String {
         return "You have ordered a dish with ${ingredients.joinToString(" and ")}"
     }
 }
 
+interface Baked
 
-sealed class PotatoDish : Dish()
-    open class SimplePotato : PotatoDish()
-    open class PotatoWithCheese : PotatoDish()
-    class PotatoWithBeans() : PotatoDish()
-    class PotatoWithCheeseAndBeans() : PotatoDish()
+sealed class BakedDish() : Dish(), Baked {
+    class BakedPotato : BakedDish()
+    class BakedPotatoWithCheese : BakedDish()
+    class BakedPotatoWithBeans : BakedDish()
+    class BakedPotatoWithCheeseAndBeans : BakedDish()
+}
 
-sealed class MexicanDish(): Dish()
-    data class Burrito(val cheese:Cheese): MexicanDish() {
-        val lettuce = Ingredient.Lettuce
-        val rice = Ingredient.Rice
-    }
-    class Fajita() : MexicanDish()
+
+
+sealed class PotatoDish : Dish() {
+    class SimplePotato(override val ingredients:Set<Ingredient>) : PotatoDish()
+    class PotatoWithCheese(override val ingredients:Set<Ingredient>) : PotatoDish()
+    class PotatoWithBeans(override val ingredients:Set<Ingredient>) : PotatoDish()
+    class PotatoWithCheeseAndBeans(override val ingredients:Set<Ingredient>) : PotatoDish()
+}
+
 
 class NotADish : Dish()
-
-
-sealed class Cheese
-    class MontereyJack(): Cheese()
-    class Cheddar(): Cheese()
-    class Oaxaca(): Cheese()
+class NotABakedDish : BakedDish()
 
 
 enum class Ingredient {
     Cheese, Beans, Avocado, Lettuce, Potato, Rice
 }
 
+enum class TemperatureScale {
+    Fahrenheit, Centigrade
+}
+
 // Infix functions
 infix fun Dish.containing(ingredient: Ingredient):Dish {
-    this.ingredients.add(ingredient)
     return getNewDish(this, ingredient)
 }
-
-
-
-//if (ingredients.contains(Ingredient.Potato)
 
 infix fun Dish.and(ingredient: Ingredient):Dish {
-    this.ingredients.add(ingredient)
     return getNewDish(this, ingredient)
 }
 
+infix fun Dish.with(ingredient: Ingredient):Dish {
+    return getNewDish(this, ingredient)
+}
+
+infix fun Dish.degrees(temperatureScale: TemperatureScale):BakedDish {
+    return when (this) {
+        is SimplePotato -> BakedPotato()
+        is PotatoWithCheese -> BakedPotatoWithCheese()
+        is PotatoWithBeans -> BakedPotatoWithBeans()
+        is PotatoWithCheeseAndBeans -> BakedPotatoWithCheeseAndBeans()
+        else -> {
+            NotABakedDish()
+        }
+    }
+}
+
+infix fun PotatoDish.degrees(temperatureScale: TemperatureScale):BakedDish {
+    return when (this) {
+        is PotatoDish -> BakedPotato()
+        is PotatoWithCheese -> BakedPotatoWithCheese()
+        is PotatoWithBeans -> BakedPotatoWithBeans()
+        is PotatoWithCheeseAndBeans -> BakedPotatoWithCheeseAndBeans()
+    }
+}
+
+infix fun Dish.`cook at`(temp: Int):Dish {
+    return this
+}
+
+private fun containsCheese(dish:Dish) {
+    dish.ingredients.contains(Ingredient.Cheese)
+}
+
+
 private fun getNewDish(dish:Dish, ingredient: Ingredient): Dish {
-    val result: Dish = when (ingredient) {
-        Ingredient.Potato -> SimplePotato()
+    return when (ingredient) {
+        Ingredient.Potato ->SimplePotato(dish.ingredients + ingredient)
         Ingredient.Cheese -> {
             when (dish) {
-                is PotatoDish -> PotatoWithCheese()
+                is PotatoDish -> if (dish.ingredients.contains(Ingredient.Beans)) PotatoWithCheeseAndBeans(dish.ingredients)
+                                 else PotatoWithCheese(dish.ingredients + ingredient)
                 else -> {
                     NotADish()
                 }
             }
         }
-        Ingredient.Beans -> TODO()
+        Ingredient.Beans -> {
+            when (dish) {
+                is PotatoDish -> if (dish.ingredients.contains(Ingredient.Cheese)) PotatoWithCheeseAndBeans(dish.ingredients + ingredient)
+                else PotatoWithBeans(dish.ingredients + ingredient)
+                else -> {
+                    NotADish()
+                }
+            }
+        }
         Ingredient.Avocado -> TODO()
         Ingredient.Lettuce -> TODO()
         Ingredient.Rice -> TODO()
     }
-    return result
 }

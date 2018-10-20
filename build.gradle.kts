@@ -22,6 +22,7 @@ dependencies {
     compile("org.http4k:http4k-core:3.39.2")
     compile("org.http4k:http4k-testing-hamkrest:3.39.2")
     compile("org.http4k:http4k-client-okhttp:3.39.2")
+    compile("org.http4k:http4k-template-thymeleaf:3.39.2")
 
 
     testCompile("org.junit.jupiter:junit-jupiter-api:5.3.1")

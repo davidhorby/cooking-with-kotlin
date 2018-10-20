@@ -19,6 +19,11 @@ dependencies {
     compile("org.jetbrains.kotlinx:kotlinx-coroutines-core:0.30.2")
     compile("org.jetbrains.kotlin:kotlin-gradle-plugin:1.1.0")
     compile(kotlin("stdlib-jdk8"))
+    compile("org.http4k:http4k-core:3.39.2")
+    compile("org.http4k:http4k-testing-hamkrest:3.39.2")
+    compile("org.http4k:http4k-client-okhttp:3.39.2")
+
+
     testCompile("org.junit.jupiter:junit-jupiter-api:5.3.1")
 }
 

@@ -1,6 +1,7 @@
 package com.dhorby.kotlin.cooking.domain
 
 import com.dhorby.kotlin.cooking.domain.BakedDish.*
+import com.dhorby.kotlin.cooking.domain.Ingredient.Carrots
 import com.dhorby.kotlin.cooking.domain.PotatoDish.*
 import com.dhorby.kotlin.cooking.domain.PotatoDish.SimplePotato
 
@@ -13,6 +14,13 @@ open class Dish(open val ingredients:Set<Ingredient>) {
 }
 
 interface Baked
+interface Chopped
+interface NotChoppable
+
+sealed class Either<out A, out B> {
+    class ChoppedIngredient<A>(val ingredient: Ingredient): Either<A, Nothing>()
+    class NotChoppable<B>(): Either<Nothing, B>()
+}
 
 sealed class BakedDish() : Dish(), Baked {
     class BakedPotato : BakedDish()
@@ -30,13 +38,21 @@ sealed class PotatoDish : Dish() {
     class PotatoWithCheeseAndBeans(override val ingredients:Set<Ingredient>) : PotatoDish()
 }
 
+typealias Carrot = Ingredient
+typealias Onion = Ingredient
+
+sealed class ChoppedIngredient : Chopped {
+    class ChoppedCarrots(ingredient: Carrot) : ChoppedIngredient()
+    class ChoppedOnions(ingredient: Onion) : ChoppedIngredient()
+}
+
 
 class NotADish : Dish()
 class NotABakedDish : BakedDish()
 
 
 enum class Ingredient {
-    Cheese, Beans, Avocado, Lettuce, Potato, Rice
+    Cheese, Beans, Avocado, Lettuce, Potato, Rice, Carrots, Onions
 }
 
 enum class TemperatureScale {
@@ -118,5 +134,7 @@ private fun getNewDish(dish:Dish, ingredient: Ingredient): Dish {
         Ingredient.Avocado -> TODO()
         Ingredient.Lettuce -> TODO()
         Ingredient.Rice -> TODO()
+        Carrots -> TODO()
+        Ingredient.Onions -> TODO()
     }
 }

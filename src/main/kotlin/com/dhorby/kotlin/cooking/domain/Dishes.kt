@@ -8,7 +8,7 @@ open class Dish(open val ingredients:Set<Ingredient>) {
     constructor() : this(mutableSetOf<Ingredient>())
 
     override fun toString(): String {
-        return "You have ordered a dish with ${ingredients.joinToString(" and ")}"
+        return "${ingredients.joinToString(" and ")}"
     }
 }
 
@@ -56,7 +56,7 @@ infix fun Dish.with(ingredient: Ingredient):Dish {
     return getNewDish(this, ingredient)
 }
 
-infix fun Dish.degrees(temperatureScale: TemperatureScale):BakedDish {
+suspend infix fun Dish.degrees(temperatureScale: TemperatureScale):BakedDish {
     return when (this) {
         is SimplePotato -> BakedPotato()
         is PotatoWithCheese -> BakedPotatoWithCheese()

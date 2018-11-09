@@ -9,10 +9,18 @@ import com.dhorby.kotlin.cooking.domain.Ingredient.*
 import com.dhorby.kotlin.cooking.domain.PotatoDish.PotatoWithCheese
 import com.dhorby.kotlin.cooking.domain.PotatoDish.SimplePotato
 import com.dhorby.kotlin.cooking.domain.TemperatureScale.*
+import kotlinx.coroutines.ObsoleteCoroutinesApi
+import kotlinx.coroutines.newFixedThreadPoolContext
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 
 
 @DisplayName("Dishes tests")
 class DishesTest() {
+
+    @ObsoleteCoroutinesApi
+    val cookingFixedTheadPool = newFixedThreadPoolContext(5, "cooking")
+
 
     @Nested
     @DisplayName("Combinations")
@@ -43,41 +51,42 @@ class DishesTest() {
     inner class Transformations {
         @Test
         fun `it should be possible to bake a potato`() {
-            val cookedDish = Dish() containing Potato `cook at` 200 degrees Centigrade
+            val dish = Dish() containing Potato
+            val cookedDish = bakeDish(dish)
             assertTrue(cookedDish is BakedPotato)
         }
 
         @Test
         fun `it should be possible to bake a potato with cheese`() {
             val dish = Dish() containing Potato and Cheese
-            val cookedDish = dish `cook at` 200 degrees Centigrade
+            val cookedDish = bakeDish(dish)
             assertTrue(cookedDish is BakedPotatoWithCheese)
         }
+
 
         @Test
         fun `it should be possible to bake a potato with beans`() {
             val dish = Dish() containing Potato and Beans
-            val cookedDish = dish `cook at` 200 degrees Centigrade
+            val cookedDish = bakeDish(dish)
             assertTrue(cookedDish is BakedPotatoWithBeans)
         }
 
         @Test
         fun `it should be possible to bake a potato with cheese and beans`() {
             val dish = Dish() containing Potato and Cheese and Beans
-            val cookedDish = dish `cook at` 200 degrees Centigrade
+            val cookedDish = bakeDish(dish)
             assertTrue(cookedDish is BakedDish.BakedPotatoWithCheeseAndBeans, "The class is not BakedPotatoWithCheeseAndBeans but is ${cookedDish.javaClass}")
         }
 
-    }
-
-    @Nested
-    @DisplayName("Actions")
-    inner class Actons {
-        @Test
-        fun `it should be possible to bake a potato`() {
-            val cookedDish = Dish() containing Potato `cook at` 200 degrees Centigrade `in the oven for` 20 `minutes` 20
-            assertTrue(cookedDish is BakedPotato)
+        private fun bakeDish(dish: Dish): BakedDish {
+            val cookedDish = runBlocking {
+                withContext(cookingFixedTheadPool) {
+                    dish `cook at` 200 degrees Centigrade
+                }
+            }
+            return cookedDish
         }
+
     }
 
 }

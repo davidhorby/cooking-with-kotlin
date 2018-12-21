@@ -26,6 +26,8 @@ dependencies {
     compile("org.http4k:http4k-testing-hamkrest:3.39.2")
     compile("org.http4k:http4k-client-okhttp:3.39.2")
     compile("org.http4k:http4k-template-thymeleaf:3.39.2")
+    compile("org.http4k:http4k-server-jetty:3.103.2")
+
 
 
     testCompile("org.junit.jupiter:junit-jupiter-api:5.3.1")
@@ -36,5 +38,13 @@ configure<JavaPluginConvention> {
     sourceCompatibility = JavaVersion.VERSION_1_8
 }
 tasks.withType<KotlinCompile> {
+    doFirst { println("Started") }
     kotlinOptions.jvmTarget = "1.8"
+    doLast { println("Completed") }
 }
+
+
+
+
+
+

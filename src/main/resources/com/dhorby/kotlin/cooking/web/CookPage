@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Cooking with Kotlin</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+
+<p>Welcome to Cooking for Kotlin!</p>
+
+<div>
+    <p th:text="${model.dish}"></p>
+</div>
+
+<div>
+    <form action="#" th:action="cook" method="post">
+       <th:block th:each="ingredient: ${model.allIngredients}">
+            <input type="checkbox" th:field="ingredient" name="ingredient" th:value="${ingredient}"/>
+            <label th:text="${ingredient}" ></label>
+        </th:block>
+    <input type="submit" value="Cook"/>
+    </form>
+</div>
+</body>
+
+</html>

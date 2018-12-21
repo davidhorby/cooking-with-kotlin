@@ -1,7 +1,7 @@
 package com.dhorby.kotlin.cooking.domain
 
 import com.dhorby.kotlin.cooking.domain.BakedDish.*
-import com.dhorby.kotlin.cooking.domain.Ingredient.Carrots
+import com.dhorby.kotlin.cooking.domain.Ingredient.*
 import com.dhorby.kotlin.cooking.domain.PotatoDish.*
 import com.dhorby.kotlin.cooking.domain.PotatoDish.SimplePotato
 
@@ -55,6 +55,8 @@ enum class Ingredient {
     Cheese, Beans, Avocado, Lettuce, Potato, Rice, Carrots, Onions
 }
 
+val allIngredients = listOf(Cheese, Beans, Avocado, Lettuce, Potato, Rice, Carrots, Onions)
+
 enum class TemperatureScale {
     Fahrenheit, Centigrade
 }
@@ -106,35 +108,35 @@ infix fun Dish.`in the oven for`(timeInSeconds: Int):Dish {
 }
 
 private fun containsCheese(dish:Dish) {
-    dish.ingredients.contains(Ingredient.Cheese)
+    dish.ingredients.contains(Cheese)
 }
 
 
 private fun getNewDish(dish:Dish, ingredient: Ingredient): Dish {
     return when (ingredient) {
-        Ingredient.Potato ->SimplePotato(dish.ingredients + ingredient)
-        Ingredient.Cheese -> {
+        Potato ->SimplePotato(dish.ingredients + ingredient)
+        Cheese -> {
             when (dish) {
-                is PotatoDish -> if (dish.ingredients.contains(Ingredient.Beans)) PotatoWithCheeseAndBeans(dish.ingredients)
+                is PotatoDish -> if (dish.ingredients.contains(Beans)) PotatoWithCheeseAndBeans(dish.ingredients)
                                  else PotatoWithCheese(dish.ingredients + ingredient)
                 else -> {
                     NotADish()
                 }
             }
         }
-        Ingredient.Beans -> {
+        Beans -> {
             when (dish) {
-                is PotatoDish -> if (dish.ingredients.contains(Ingredient.Cheese)) PotatoWithCheeseAndBeans(dish.ingredients + ingredient)
+                is PotatoDish -> if (dish.ingredients.contains(Cheese)) PotatoWithCheeseAndBeans(dish.ingredients + ingredient)
                 else PotatoWithBeans(dish.ingredients + ingredient)
                 else -> {
                     NotADish()
                 }
             }
         }
-        Ingredient.Avocado -> TODO()
-        Ingredient.Lettuce -> TODO()
-        Ingredient.Rice -> TODO()
+        Avocado -> TODO()
+        Lettuce -> TODO()
+        Rice -> TODO()
         Carrots -> TODO()
-        Ingredient.Onions -> TODO()
+        Onions -> TODO()
     }
 }

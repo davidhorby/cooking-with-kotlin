@@ -7,10 +7,9 @@ import com.dhorby.kotlin.cooking.domain.containing
 class CookingService() {
 
     fun cook(ingredients: List<Ingredient>): Dish {
-        val dish = ingredients.foldRight(Dish()) { ingredient: Ingredient, dish: Dish ->
+        return ingredients.fold(Dish()) { dish: Dish, ingredient: Ingredient ->
             dish.containing(ingredient)
         }
-        return dish
     }
 
 }

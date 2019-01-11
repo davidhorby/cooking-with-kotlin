@@ -7,29 +7,30 @@ import org.junit.jupiter.api.Assertions.*
 internal class FuzzyMatcherImplTest {
 
 
-    val testList = mutableListOf(
-            "Oxford University",
-            "Cambridge University",
-            "Bristol University")
+    val testList = mapOf(
+            1 to "Oxford University",
+            2 to "Cambridge University",
+            3 to "Bristol University",
+            4 to "Harvard College")
 
     @Test
     fun `the word 'ofxord' should match to 'Oxford University'`() {
         val fuzzyMatcherImpl = FuzzyMatcherImpl(testList)
-        val matchedValue = fuzzyMatcherImpl.fuzzyMatch("ofxord")
-        assertTrue(matchedValue == "Oxford University")
+        val matchedValue = fuzzyMatcherImpl.levenshteinDistance("ofxord")
+        assertTrue(matchedValue == "Oxford University", "Matched 'ofxord' to $matchedValue")
     }
 
     @Test
     fun `the word 'ambriddeg univesirty' should match to 'Cambridge University'`() {
         val fuzzyMatcherImpl = FuzzyMatcherImpl(testList)
-        val matchedValue = fuzzyMatcherImpl.fuzzyMatch("ambriddeg univesirty")
-        assertTrue(matchedValue == "Cambridge University")
+        val matchedValue = fuzzyMatcherImpl.levenshteinDistance("ambriddeg univesirty")
+        assertTrue(matchedValue == "Cambridge University", "Matched 'ambriddeg univesirty' to $matchedValue")
     }
 
     @Test
     fun `the word 'University of Cambridge' should match to 'Cambridge University'`() {
         val fuzzyMatcherImpl = FuzzyMatcherImpl(testList)
-        val matchedValue = fuzzyMatcherImpl.fuzzyMatch("University of Cambridge")
-        assertTrue(matchedValue == "Cambridge University", "Matched Cambridge University to $matchedValue")
+        val matchedValue = fuzzyMatcherImpl.levenshteinDistance("University of Cambridge")
+        assertTrue(matchedValue == "Cambridge University", "Matched 'University of Cambridge' to $matchedValue")
     }
 }

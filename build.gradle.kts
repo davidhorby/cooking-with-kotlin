@@ -27,6 +27,8 @@ dependencies {
     compile("org.http4k:http4k-client-okhttp:3.39.2")
     compile("org.http4k:http4k-template-thymeleaf:3.39.2")
     compile("org.http4k:http4k-server-jetty:3.103.2")
+    // https://mvnrepository.com/artifact/org.apache.commons/commons-text
+    compile("org.apache.commons:commons-text:1.6")
 
 
 

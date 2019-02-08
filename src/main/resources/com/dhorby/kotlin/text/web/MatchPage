@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Fuzzy Seraching</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style>
+    body {
+      background-color: white;
+    }
+
+    h1 {
+      color: black;
+      text-align: center;
+      font-family: tahoma;
+      font-size: 30px;
+    }
+
+    p {
+      font-family: tahoma;
+      font-size: 20px;
+    }
+
+    table, th, td {
+      border: 1px solid black;
+      font-family: tahoma;
+      font-size: 20px;
+    }
+    </style>
+</head>
+
+<body>
+
+<p>
+<h1>Search for your institution</h1>
+</p>
+
+<br/>
+
+<div>
+    <form action="#" th:action="match" method="get">
+    <input type="text" name="name">
+    <input type="submit" value="search"/>
+    </form>
+</div>
+<br/>
+<br/>
+<br/>
+<br/>
+<div>
+    <table>
+         <thead>
+            <tr>
+                <th> Matches </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="match : ${model.matches}">
+                <td><span th:text="${match}"></span></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+
+</html>

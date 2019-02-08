@@ -4,15 +4,22 @@ import org.apache.commons.text.similarity.FuzzyScore
 import org.apache.commons.text.similarity.LevenshteinDistance
 import java.util.*
 
-data class FuzzyMatch(val keyVal:Int, val origVal:String, val checkText:String) {
+data class FuzzyMatch(val origVal: String, val checkText: String) {
     val fuzzyScoreer = FuzzyScore(Locale.ENGLISH)
-    val fuzzyScoreVal:Int = fuzzyScoreer.fuzzyScore(origVal.toLowerCase(), checkText.toLowerCase())
-    val levenshteinDistance:Int =  LevenshteinDistance.getDefaultInstance().apply(origVal.toLowerCase(), checkText.toLowerCase())
+    val fuzzyScoreVal:Int = fuzzyScoreer.fuzzyScore(origVal.toLowerCase().removeFilterWords(), checkText.toLowerCase())
+    val levenshteinDistance:Int =
+            LevenshteinDistance.getDefaultInstance().apply(origVal.toLowerCase().removeFilterWords(), checkText.toLowerCase())
     override fun toString(): String {
-        return "${keyVal}, $origVal, $checkText, $fuzzyScoreVal, $levenshteinDistance"
+        return "$origVal, $checkText, $fuzzyScoreVal, $levenshteinDistance"
     }
 }
 
+inline fun String.removeFilterWords():String {
+    FuzzyMatcherImpl.stopWordList.forEach {
+        this.replace(it, " ")
+    }
+    return this
+}
 
 class FuzzyMatcherImpl(val checkList: Map<Int, String>) : FuzzyMatcher {
 
@@ -52,13 +59,13 @@ class FuzzyMatcherImpl(val checkList: Map<Int, String>) : FuzzyMatcher {
 //        return final
     }
 
-    override fun levenshteinDistance(checkText: String): String? {
-        val cleanedText = checkText.split(" ").filter { !stopWordList.contains(it.toLowerCase()) }.joinToString(" ")
-        val checkMap = cleanList.map { it.key to sumLevenshteinDistance(it.value, cleanedText) }.toMap()
-        val mostLikelyMatch = checkMap.minBy { it ->  it.value }
-        val matchedMapValue = checkList.get(mostLikelyMatch!!.key)
-        return matchedMapValue
-    }
+//    override fun funLevenshteinDistance(checkText: String): String? {
+//        val cleanedText = checkText.split(" ").filter { !stopWordList.contains(it.toLowerCase()) }.joinToString(" ")
+//        val checkMap = cleanList.map { it.key to sumLevenshteinDistance(it.value, cleanedText) }.toMap()
+//        val mostLikelyMatch = checkMap.minBy { it ->  it.value }
+//        val matchedMapValue = checkList.get(mostLikelyMatch!!.key)
+//        return matchedMapValue
+//    }
 
     fun fuzzyScore(checkText: String): String? {
         val fuzzyScore = FuzzyScore(Locale.ENGLISH)
@@ -72,23 +79,41 @@ class FuzzyMatcherImpl(val checkList: Map<Int, String>) : FuzzyMatcher {
         return matchedMapValue
     }
 
-    fun fuzzyAndLevensteinScore(checkText: String):String {
+    fun fuzzyAndLevensteinScore(checkText: String): List<FuzzyMatch> {
 
-        val fuzzyChecKList = checkList.map { FuzzyMatch(it.key, it.value, checkText) }
+        val fuzzyChecKList = checkList.map { FuzzyMatch(it.value, checkText) }
 
         val filterList = stopWordFilter(checkText)
         val realCheckList = if (filterList.size > 0) {
-            fuzzyChecKList.filter { filterList.filter { filterval -> it.origVal.contains(filterval) }.size == 0 }
+
+            // Clean the original text
+            val cleanWord = filterList.map { checkText.replace(it, "") }.joinToString(" ")
+
+            val result = fuzzyChecKList
+                    .filter { checkForFilterWord(filterList, it.origVal) }
+//            result.forEach {println(it)}
+            result
         } else {
             fuzzyChecKList
         }
 
 
-
-        val firstFilter = realCheckList.filter { it.fuzzyScoreVal > 6 }
-        firstFilter.forEach { println(it) }
-//        firstFilter.filter { it.levenshteinDistance < 20 }.forEach { println(it) }
+        val firstFilter = fuzzyChecKList.filter { it.fuzzyScoreVal > 10 }
+//        firstFilter.forEach { println(it) }
+        firstFilter.filter { it.levenshteinDistance < 20 }.forEach { println(it) }
         val mostLikelyMatch = firstFilter.maxBy { it.fuzzyScoreVal }
-        return mostLikelyMatch?.origVal.orEmpty()
+        return firstFilter
+    }
+
+
+
+    fun checkForFilterWord(filterList:List<String>, word:String):Boolean {
+        val test = filterList.map { checkWord(word, it) }.toList()
+//        println("returning ${test.any(true)} for $word")
+        return test.any{ it }
+    }
+
+    private fun checkWord(word: String, filterWord: String):Boolean  {
+        return word.toLowerCase().contains(filterWord.toLowerCase())
     }
 }

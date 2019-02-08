@@ -17,7 +17,6 @@ Arts and Humanities Data Service
 Asahikawa Medical University
 Ashton Sixth Form College
 Askham Bryan College
-Aston University (IDP 2.1 Test Only)
 Aston University OpenAthens
 Atomwide Limited: USO
 Austrian Academy of Sciences
@@ -59,7 +58,6 @@ Blackburn College
 Blackburn with Darwen BSF
 Blackpool Sixth Form College
 Blackpool and The Fylde College
-Blackpool and The Fylde College (Development)
 Bolton Community College
 Bolton Sixth Form College
 Bournemouth University
@@ -69,16 +67,13 @@ Bradford College
 Bradford Learning Network
 Bridgend College
 Bridgwater College
-Bridgwater College (Shibboleth Test)
 Brighton Hove & Sussex 6th Form College
 Brighton and Sussex Medical School
-Brighton and Sussex Medical School (Test)
 British Universities Film & Video Council
 Brno University of Technology
 Brockenhurst College
 Brooklands College
 Brunel University
-Brunel University (Test)
 Bsb München
 Bsix Brooke House Sixth Form College
 Buckinghamshire New University
@@ -102,8 +97,6 @@ Calderdale College
 Cambridge Regional College
 Canterbury Christ Church University
 Cardiff University
-Cardiff University (Test - Dev)
-Cardiff University (Test - Preprod)
 Cardinal Newman College
 Cardonald College
 Carmel College
@@ -147,9 +140,7 @@ Cornwall College
 Coulsdon Sixth Form College in Croydon
 Courtauld Institute of Art
 Coventry University
-Coventry University (test)
 Cranfield University - Shibboleth
-Cranfield University - Test
 Craven College
 Croatian Academy of Sciences and Arts
 Croatian Forest Research Institute (Hrvatski Sumarski Institut)
@@ -195,8 +186,6 @@ Dudley College
 Dumfries and Galloway College
 Dundee College
 E2BN Regional
-EDINA (trial only)
-EDINA - development
 EDINA services for schools
 EMPA
 EPFL - EPF Lausanne
@@ -212,9 +201,6 @@ Edge Hill University
 Edinburgh College of Art
 Edinburgh Napier University
 Edinburgh's Telford College
-Edugate Test Identity Provider
-Eduserv Athens (Beta)
-Eduserv Beta
 Ehime University
 Elmwood College (via Athens)
 Escola Superior de Enfermagem de Coimbra
@@ -339,7 +325,6 @@ IZS Sicilia
 IZSM - Istituto Zooprofilattico Sperimentale del Mezzogiorno
 Ibaraki University
 Imperial College London
-Imperial College London TEST
 Inner Mongolia University
 Inselspital - Universitätsspital Bern
 Institut für Deutsche Sprache (IDS)
@@ -370,12 +355,9 @@ Instituto de Salud Carlos III
 Istituto Italiano di tecnologia
 Istituto Oncologico Veneto - IOV IRCCS
 JISC RSC Wales
-JISC RSC Wales (Development IdP)
-JISC RSC Wales (Shib 2.0 testing)
 Jacobs University Bremen gGmbH
 James Watt College
 Jewel and Esk College
-Jewel and Esk College (old Athens)
 Jichi Medical University
 Johannes Kepler University Linz
 John Ruskin College
@@ -393,7 +375,6 @@ Karolinska Institutet
 Keele University
 Kendal College
 Kensington and Chelsea College
-Kensington and Chelsea College (TEST IdP Shib 2)
 Kent Learning Zone (KLZ)
 Kidderminster College
 Kilmarnock College
@@ -451,10 +432,8 @@ Liverpool School of Tropical Medicine
 London Business School
 London Library
 London Metropolitan University
-London Metropolitan University - Test
 London School of Economics and Political Science
 London School of Hygiene & Tropical Medicine
-London School of Hygiene and Tropical Medicine (test)
 London South Bank University
 Longley Park Sixth Form College
 Loughborough College
@@ -485,7 +464,6 @@ Moredun Research Institute
 Morley College
 Moss Landing Marine Laboratories
 Motherwell College
-Moulton College (Testing)
 Muroran Institute of Technology
 NERC
 NESCOT (North East Surrey College of Technology)
@@ -532,7 +510,6 @@ North Hertfordshire College
 North Warwickshire and Hinckley College
 North West Regional College
 Northampton College IdP
-Northampton College Shib2 (Test)
 Northbrook College Sussex
 Northeast Normal University
 Northeastern University
@@ -541,7 +518,6 @@ Northern Illinois University
 Northern Regional College
 Northumberland College
 Northumbria University
-Northumbria University: IT Services Test
 Norton Radstock College
 Norwich Bioscience Institutes
 Norwich University College of the Arts
@@ -649,7 +625,6 @@ Salzburg University of Applied Sciences
 Sandwell College
 Sanitätsakademie der Bundeswehr
 Sapporo Medical University
-School of Oriental and African Studies: Test Shibboleth 2 server
 School of Pharmacy, University of London
 Science and Technology Facilities Council
 Science and Technology Facilities Council (2nd IdP)
@@ -657,8 +632,6 @@ Scientific Institute of Public Health
 Scottish Crop Research Institute
 Seijo University
 Selby College
-Semantico Internet2 Test IdP
-Semantico Test IdP
 Semmelweis University
 Senshu University
 Shandong University
@@ -714,7 +687,6 @@ Stafford College
 Staffordshire University
 Stanmore College
 Stephenson College
-Stephenson College - TEST
 Stevenson College Edinburgh
 Stockport College
 Stockton Riverside College
@@ -772,7 +744,6 @@ Tower Hamlets College
 Toyohashi University of Technology
 Trafford College
 Trinity Laban
-Trinity Laban TEST
 Truro and Penwith College
 Tsinghua University
 U.N.E.D.
@@ -872,30 +843,24 @@ University of Bergamo
 University of Bern
 University of Bielefeld
 University of Birmingham
-University of Birmingham (Development IdP)
 University of Bolton
 University of Bolton - Do Not Use
 University of Bradford
 University of Bradford
 University of Brighton
-University of Brighton (Test)
 University of Bristol
 University of Calgary
 University of Cambridge
-University of Cambridge TEST (DON'T USE)
 University of Camerino
 University of Central Lancashire (Athens)
 University of Central Lancashire (Shibboleth)
 University of Chester
-University of Chichester (Shibboleth Testing)
 University of Cumbria
 University of Debrecen
 University of Derby
 University of Dubrovnik
 University of Dundee
-University of Dundee test 2.1 IDP (Do not use)
 University of Durham
-University of Durham 2.1 test (Do not use)
 University of East Anglia
 University of East Anglia (UEA)
 University of East London
@@ -903,13 +868,10 @@ University of Edinburgh
 University of Edinburgh (SDSS): Lamlash
 University of Edinburgh (SDSS): Skaill
 University of Edinburgh: IS-ITI
-University of Edinburgh: SDSS Test IdP (vsp.edina.ac.uk)
-University of Edinburgh: V2 TEST
 University of Electronic Science and Technology of China
 University of Essex
 University of Essex (UKDA SAFARI)
 University of Exeter
-University of Exeter Test
 University of Ferrara
 University of Fribourg
 University of Fukui
@@ -918,7 +880,6 @@ University of Geneva
 University of Genoa
 University of Glamorgan
 University of Glasgow
-University of Glasgow (test idp)
 University of Gloucestershire
 University of Graz
 University of Greenwich
@@ -937,7 +898,6 @@ University of Kent - OpenID Gateway
 University of Lausanne
 University of Leeds
 University of Leicester
-University of Leicester (Shibboleth Test)
 University of Leoben
 University of Liechtenstein
 University of Limerick
@@ -951,9 +911,7 @@ University of London: External System (ATHENS)
 University of Lucerne
 University of Macerata
 University of Manchester
-University of Manchester (Beta)
 University of Manchester: Mimas
-University of Manchester: Mimas Development IdP
 University of Manitoba
 University of Milano-Bicocca
 University of Miyazaki
@@ -964,12 +922,10 @@ University of Northampton
 University of Nottingham
 University of Nottingham Malaysia Campus
 University of Nottingham Ningbo, China
-University of Nottingham: TEST
 University of Osijek
 University of Ottawa
 University of Oxford
 University of Oxford (BSP)
-University of Oxford Test IdP
 University of Palermo
 University of Parma
 University of Perugia
@@ -996,20 +952,14 @@ University of Science and Technology of China
 University of Sheffield
 University of Southampton
 University of Southampton (Dev 2.x)
-University of Southampton (Development)
-University of Southampton (Testing)
 University of Split
 University of St Andrews
-University of St Andrews (2.1 test)
-University of St Andrews (2.2 test)
 University of St. Gallen
 University of Stirling
-University of Stirling - Development
 University of Strathclyde
 University of Sunderland
 University of Surrey
 University of Sussex
-University of Sussex (development)
 University of Toronto
 University of Trieste
 University of Tsukuba
@@ -1023,22 +973,18 @@ University of Wales Trinity Saint David
 University of Wales, Newport
 University of Wales, Newport (OALA)
 University of Warwick
-University of Warwick: Development IdP
 University of Waterloo
 University of West London
 University of Western Ontario
 University of Westminster
-University of Westminster (2.1 test)
 University of Winchester
 University of Windsor
 University of Wisconsin-Milwaukee
 University of Wolverhampton
 University of Wolverhampton (Athens)
 University of Worcester
-University of Worcester Test
 University of Yamanashi
 University of York
-University of York test service
 University of Zadar
 University of Zagreb
 University of Zurich
@@ -1103,7 +1049,6 @@ Warrington Collegiate
 Warrington Collegiate (via IdP)
 Warwickshire College
 Warwickshire e-Learning Community
-WebBased Limited: Test IdP
 Webbased Limited: Idp
 Wellcome Trust
 Wellcome Trust Sanger Institute
@@ -1115,12 +1060,10 @@ West Nottinghamshire College
 West Suffolk College
 West Thames College
 Westfälische Wilhelms-Universität Münster
-Westlaw UK Test IdP
 Westminster Kingsway College
 Weston College
 Weymouth College
 Wigan & Leigh College
-Wigan & Leigh College Test
 Wiltshire College
 Winstanley College
 Wirral Metropolitan College

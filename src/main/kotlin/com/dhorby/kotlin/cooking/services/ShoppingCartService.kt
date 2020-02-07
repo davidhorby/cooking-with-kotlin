@@ -1,12 +1,13 @@
-package com.dhorby.kotlin.cooking.domain
+package com.dhorby.kotlin.cooking.services
 
 import com.dhorby.kotlin.cooking.actions.NumberOfShoppingItems
 import com.dhorby.kotlin.cooking.actions.SalesTax
 import com.dhorby.kotlin.cooking.actions.Shopping
 import com.dhorby.kotlin.cooking.actions.TotalPrice
+import com.dhorby.kotlin.cooking.domain.ShoppingItem
 import com.dhorby.kotlin.cooking.extensions.round
 
-class ShoppingCart: Shopping {
+class ShoppingCartService: Shopping {
 
     private val shoppingList:MutableList<ShoppingItem> = mutableListOf<ShoppingItem>()
     private val salesTax=12.5

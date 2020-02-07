@@ -51,12 +51,21 @@ internal class ShoppingServiceTest {
 
     @Test
     internal fun `check total price`() {
-        val expectedShoppingList = listOf(ShoppingItems.IPHONE.item, ShoppingItems.IPHONE.item, ShoppingItems.IPHONE.item)
         val shoppingService = ShoppingService()
         shoppingService.addItem(ShoppingItems.IPHONE.item)
         shoppingService.addItem(ShoppingItems.IPHONE.item)
         shoppingService.addItem(ShoppingItems.IPHONE.item)
         val shoppingTotalPrice = shoppingService.getTotal()
-        assertEquals(shoppingTotalPrice, 1050.66)
+        assertEquals(1050.66,shoppingTotalPrice)
+    }
+
+    @Test
+    internal fun `check sales tax`() {
+        val shoppingService = ShoppingService()
+        shoppingService.addItem(ShoppingItems.IPHONE.item)
+        shoppingService.addItem(ShoppingItems.IPHONE.item)
+        shoppingService.addItem(ShoppingItems.IPHONE.item)
+        val shoppingTotalPrice = shoppingService.getSalesTax()
+        assertEquals(131.33, shoppingTotalPrice )
     }
 }

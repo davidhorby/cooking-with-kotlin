@@ -1,5 +1,6 @@
 package com.dhorby.kotlin.cooking.services
 
+import com.dhorby.kotlin.cooking.actions.SalesTax
 import com.dhorby.kotlin.cooking.actions.Shopping
 import com.dhorby.kotlin.cooking.actions.TotalPrice
 import com.dhorby.kotlin.cooking.domain.ShoppingCart
@@ -23,6 +24,10 @@ class ShoppingService:Shopping {
 
     override fun getTotal(): TotalPrice {
         return shoppingCart.getTotal()
+    }
+
+    override fun getSalesTax(): SalesTax {
+        return shoppingCart.getSalesTax()
     }
 
 }

@@ -1,9 +1,8 @@
-
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     java
-    kotlin("jvm") version "1.3.0"
+    kotlin("jvm") version "1.3.31"
 }
 
 
@@ -16,9 +15,8 @@ repositories {
 }
 
 
-
 dependencies {
-    compile("org.jetbrains.kotlin:kotlin-stdlib:1.3.0")
+    implementation(kotlin("stdlib-jdk8"))
     compile("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.0.1")
     compile("org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.0")
     compile(kotlin("stdlib-jdk8"))
@@ -30,21 +28,31 @@ dependencies {
     compile("org.apache.commons:commons-text:1.6")
     compile ("com.warrenstrange:googleauth:1.1.2")
 
-
-
-    testCompile("org.junit.jupiter:junit-jupiter-api:5.3.1")
+    testImplementation(kotlin("stdlib"))
+    testImplementation("org.junit.jupiter:junit-jupiter:5.6.0")
 }
 
 
 configure<JavaPluginConvention> {
     sourceCompatibility = JavaVersion.VERSION_1_8
 }
+
+
 tasks.withType<KotlinCompile> {
     doFirst { println("Started") }
     kotlinOptions.jvmTarget = "1.8"
     doLast { println("Completed") }
 }
 
+tasks.withType<Test> {
+    useJUnitPlatform ()
+}
+
+
+
+
+
+   
 
 
 

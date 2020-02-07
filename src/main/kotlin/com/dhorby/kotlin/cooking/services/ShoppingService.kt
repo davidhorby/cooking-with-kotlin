@@ -1,6 +1,7 @@
 package com.dhorby.kotlin.cooking.services
 
 import com.dhorby.kotlin.cooking.actions.Shopping
+import com.dhorby.kotlin.cooking.actions.TotalPrice
 import com.dhorby.kotlin.cooking.domain.ShoppingCart
 import com.dhorby.kotlin.cooking.domain.ShoppingItem
 
@@ -19,4 +20,9 @@ class ShoppingService:Shopping {
     override fun removeItem(shoppingItem: ShoppingItem) {
         shoppingCart.removeItem(shoppingItem)
     }
+
+    override fun getTotal(): TotalPrice {
+        return shoppingCart.getTotal()
+    }
+
 }

@@ -12,24 +12,24 @@ internal class ShoppingServiceTest {
 
 
     @Test
-    fun addItem() {
+    internal fun addItem() {
         val shoppingService = ShoppingService()
         shoppingService.addItem(ShoppingItems.MACMINI.item)
         assertEquals(listOf(ShoppingItems.MACMINI.item), shoppingService.listItems())
     }
 
     @Test
-    fun removeItem() {
+    internal fun removeItem() {
         val shoppingService = ShoppingService()
         shoppingService.addItem(ShoppingItems.MACMINI.item)
         shoppingService.addItem(ShoppingItems.IPOD.item)
-        assertEquals(listOf(ShoppingItems.MACMINI.item,ShoppingItems.IPOD.item), shoppingService.listItems())
+        assertEquals(listOf(ShoppingItems.MACMINI.item, ShoppingItems.IPOD.item), shoppingService.listItems())
         shoppingService.removeItem(ShoppingItems.MACMINI.item)
         assertEquals(listOf(ShoppingItems.IPOD.item), shoppingService.listItems())
     }
 
     @Test
-    fun listItems() {
+    internal fun listItems() {
         val expectedShoppingList = listOf(ShoppingItems.IPHONE.item, ShoppingItems.MACMINI.item)
         val shoppingService = ShoppingService()
         shoppingService.addItem(ShoppingItems.IPHONE.item)
@@ -38,5 +38,25 @@ internal class ShoppingServiceTest {
         assertEquals(shoppingList, expectedShoppingList)
     }
 
+    @Test
+    internal fun `add multiple items of the same type`() {
+        val expectedShoppingList = listOf(ShoppingItems.IPHONE.item, ShoppingItems.IPHONE.item, ShoppingItems.IPHONE.item)
+        val shoppingService = ShoppingService()
+        shoppingService.addItem(ShoppingItems.IPHONE.item)
+        shoppingService.addItem(ShoppingItems.IPHONE.item)
+        shoppingService.addItem(ShoppingItems.IPHONE.item)
+        val shoppingList: List<ShoppingItem> = shoppingService.listItems()
+        assertEquals(shoppingList, expectedShoppingList)
+    }
 
+    @Test
+    internal fun `check total price`() {
+        val expectedShoppingList = listOf(ShoppingItems.IPHONE.item, ShoppingItems.IPHONE.item, ShoppingItems.IPHONE.item)
+        val shoppingService = ShoppingService()
+        shoppingService.addItem(ShoppingItems.IPHONE.item)
+        shoppingService.addItem(ShoppingItems.IPHONE.item)
+        shoppingService.addItem(ShoppingItems.IPHONE.item)
+        val shoppingTotalPrice = shoppingService.getTotal()
+        assertEquals(shoppingTotalPrice, 1050.66)
+    }
 }

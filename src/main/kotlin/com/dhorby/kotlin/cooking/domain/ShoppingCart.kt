@@ -1,6 +1,7 @@
 package com.dhorby.kotlin.cooking.domain
 
 import com.dhorby.kotlin.cooking.actions.Shopping
+import com.dhorby.kotlin.cooking.actions.TotalPrice
 
 class ShoppingCart: Shopping {
 
@@ -16,6 +17,10 @@ class ShoppingCart: Shopping {
 
     override fun removeItem(shoppingItem: ShoppingItem) {
         shoppingList.remove(shoppingItem)
+    }
+
+    override fun getTotal(): TotalPrice {
+        return shoppingList.map { it.price }.sum()
     }
 
 }

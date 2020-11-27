@@ -1,18 +1,21 @@
 package com.dhorby.kotlin.cooking.domain
 
 import com.dhorby.kotlin.cooking.domain.BakedDish.*
-import org.junit.jupiter.api.Assertions.*
-import org.junit.jupiter.api.DisplayName
-import org.junit.jupiter.api.Nested
-import org.junit.jupiter.api.Test
 import com.dhorby.kotlin.cooking.domain.Ingredient.*
 import com.dhorby.kotlin.cooking.domain.PotatoDish.PotatoWithCheese
 import com.dhorby.kotlin.cooking.domain.PotatoDish.SimplePotato
-import com.dhorby.kotlin.cooking.domain.TemperatureScale.*
+import com.dhorby.kotlin.cooking.domain.TemperatureScale.Centigrade
+import com.natpryce.hamkrest.assertion.assertThat
+import com.natpryce.hamkrest.equalTo
 import kotlinx.coroutines.ObsoleteCoroutinesApi
 import kotlinx.coroutines.newFixedThreadPoolContext
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
+import org.junit.jupiter.api.Assertions.assertThrows
+import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.DisplayName
+import org.junit.jupiter.api.Nested
+import org.junit.jupiter.api.Test
 
 
 @DisplayName("Dishes tests")
@@ -34,15 +37,34 @@ class DishesTest() {
 
         @Test
         fun `it should be possible to create a potato with cheese dish`() {
-            val dishUnderTest = Dish() containing Ingredient.Potato and Ingredient.Cheese
+            val dishUnderTest = Dish() containing Ingredient.Potato and Cheese
             assertTrue(dishUnderTest is PotatoDish)
             assertTrue(dishUnderTest is PotatoWithCheese)
         }
 
         @Test
         fun `it should not be possible to create dish with just cheese`() {
-            val dishUnderTest = Dish() containing Ingredient.Cheese
+            val dishUnderTest = Dish() containing Cheese
             assertTrue(dishUnderTest is NotADish)
+        }
+    }
+
+    @Nested
+    @DisplayName("Enums")
+    inner class Enums {
+
+        @Test
+        fun `lookup and enum by names`() {
+            val testName = "Cheese"
+            val cheeseEnum = Ingredient.valueOf(testName)
+            assertThat(cheeseEnum.name, equalTo("Cheese"))
+        }
+
+        @Test
+        fun `should not find invalid enums`() {
+            val exception: Exception = assertThrows(IllegalArgumentException::class.java) {
+                Ingredient.valueOf("Sofa")
+            }
         }
     }
 

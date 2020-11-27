@@ -1,7 +1,7 @@
 package com.dhorby.kotlin.cooking.web
 
+import com.natpryce.hamkrest.assertion.assertThat
 import com.natpryce.hamkrest.containsSubstring
-import com.natpryce.hamkrest.should.shouldMatch
 import org.http4k.client.OkHttp
 import org.http4k.core.Method
 import org.http4k.core.Request
@@ -29,12 +29,12 @@ class CookingServerTest {
 
     @Test
     fun `responds to ping`() {
-        client(Request(Method.GET, "http://localhost:$port/ping")) shouldMatch hasStatus(OK)
+        assertThat(client(Request(Method.GET, "http://localhost:$port/ping")), hasStatus(OK))
     }
 
     @Test
     fun `return cooking for kotlin main page`() {
         val response = client(Request(Method.GET, "http://localhost:$port/"))
-        response.bodyString() shouldMatch containsSubstring("Cooking for Kotlin")
+        assertThat(response.bodyString(), containsSubstring("Cooking for Kotlin"))
     }
 }

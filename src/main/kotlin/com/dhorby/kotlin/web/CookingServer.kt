@@ -5,6 +5,7 @@ import com.dhorby.kotlin.web.Settings.PORT
 import org.http4k.client.OkHttp
 import org.http4k.cloudnative.env.Environment
 import org.http4k.cloudnative.env.EnvironmentKey
+import org.http4k.core.Uri
 import org.http4k.core.then
 import org.http4k.filter.ClientFilters
 import org.http4k.lens.int
@@ -21,6 +22,6 @@ fun CookingServer(env: Environment): Http4kServer =
 
 
 object Settings {
-    val PORT = EnvironmentKey.int().required("PORT")
-    val DISH_DIRECTORY_URL = EnvironmentKey.uri().required("DISH_DIRECTORY_URL")
+    val PORT = EnvironmentKey.int().defaulted("PORT", 8080)
+    val DISH_DIRECTORY_URL = EnvironmentKey.uri().defaulted("DISH_DIRECTORY_URL", Uri.of("http://localhost:8080"))
 }

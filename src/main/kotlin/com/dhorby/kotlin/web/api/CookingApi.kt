@@ -14,8 +14,9 @@ fun CookingApi(dishDirectory: DishDirectory): RoutingHttpHandler =
         "/api" bind routes(
                 contract {
                     renderer = OpenApi3(ApiInfo("Dish Server API", "v1.0", "List of dishes"), Jackson)
-                    descriptionPath = "/api-docs"
+                    descriptionPath = "/openapi.json"
                     routes += FindDish(dishDirectory::lookup)
                     routes += CookDish()
                 }
         )
+

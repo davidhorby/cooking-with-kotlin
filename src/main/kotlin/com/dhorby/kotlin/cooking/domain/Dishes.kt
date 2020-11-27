@@ -3,9 +3,8 @@ package com.dhorby.kotlin.cooking.domain
 import com.dhorby.kotlin.cooking.domain.BakedDish.*
 import com.dhorby.kotlin.cooking.domain.Ingredient.*
 import com.dhorby.kotlin.cooking.domain.PotatoDish.*
-import com.dhorby.kotlin.cooking.domain.PotatoDish.SimplePotato
 
-open class Dish(open val ingredients:Set<Ingredient>) {
+open class Dish(open val ingredients: Set<Ingredient>) {
     constructor() : this(mutableSetOf<Ingredient>())
 
     override fun toString(): String {
@@ -13,13 +12,16 @@ open class Dish(open val ingredients:Set<Ingredient>) {
     }
 }
 
+data class DishName(val value: String)
+data class Message(val message: String)
+
 interface Baked
 interface Chopped
 interface NotChoppable
 
 sealed class Either<out A, out B> {
-    class ChoppedIngredient<A>(val ingredient: Ingredient): Either<A, Nothing>()
-    class NotChoppable<B>(): Either<Nothing, B>()
+    class ChoppedIngredient<A>(val ingredient: Ingredient) : Either<A, Nothing>()
+    class NotChoppable<B>() : Either<Nothing, B>()
 }
 
 sealed class BakedDish() : Dish(), Baked {

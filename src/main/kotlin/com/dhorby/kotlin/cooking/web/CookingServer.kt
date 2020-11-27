@@ -9,6 +9,7 @@ import org.http4k.core.Method
 import org.http4k.core.Response
 import org.http4k.core.Status.Companion.INTERNAL_SERVER_ERROR
 import org.http4k.core.Status.Companion.OK
+import org.http4k.routing.RoutingHttpHandler
 import org.http4k.routing.bind
 import org.http4k.routing.routes
 import org.http4k.server.Http4kServer
@@ -30,17 +31,18 @@ class CookingServer() {
 
         private fun buildServer(port:Int): Http4kServer {
             val renderer = ThymeleafTemplates().HotReload("src/main/resources")
-            return routes(
+            val routes: RoutingHttpHandler = routes(
                     "/" bind Method.GET to { Response(OK).body(renderer(IndexPage())) },
                     "/ping" bind Method.GET to { Response(OK) },
                     "/cook" bind Method.GET to { cook(renderer) },
-                    "/cook" bind Method.POST to {request ->
+                    "/cook" bind Method.POST to { request ->
                         val ings = request.query("ingredient")
                         println("--->>>>>" + ings)
                         cook(renderer)
                     },
                     "/fail" bind Method.POST to { Response(INTERNAL_SERVER_ERROR) }
-            ).asServer(SunHttp(port))
+            )
+            return routes.asServer(SunHttp(port))
         }
 
         fun cook(renderer:TemplateRenderer): Response {

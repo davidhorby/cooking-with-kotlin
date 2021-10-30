@@ -12,16 +12,17 @@ buildscript {
     }
 }
 
+apply plugin: 'application'
 apply plugin: 'kotlin'
 apply plugin: 'jacoco'
 
-sourceCompatibility = JavaVersion.VERSION_1_8
 
 repositories {
     jcenter()
     mavenCentral()
 }
 
+mainClassName = "com.dhorby.kotlin.web.CookingApp"
 
 dependencies {
     implementation(platform("org.http4k:http4k-bom:$http4k_version"))

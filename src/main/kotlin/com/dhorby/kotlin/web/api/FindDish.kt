@@ -5,6 +5,7 @@ import com.dhorby.kotlin.cooking.domain.DishName
 import com.dhorby.kotlin.cooking.domain.Message
 import com.dhorby.kotlin.cooking.web.CookingServer
 import org.http4k.contract.ContractRoute
+import org.http4k.contract.ContractRouteSpec0
 import org.http4k.contract.meta
 import org.http4k.core.*
 import org.http4k.format.Jackson.auto
@@ -15,8 +16,8 @@ fun FindDish(lookup: (DishName) -> Dish?): ContractRoute {
     val dishName = Query.map(::DishName).required("dishname")
 
     val message = Body.auto<Message>().toLens()
-    val dishFinder: HttpHandler = { dishname ->
-        lookup(dishName(dishname))?.ingredients
+    val dishFinder: HttpHandler = { dishName ->
+        lookup(dishName(dishName))?.ingredients
                 ?.let { ingredients ->
                     Response(Status.OK).with(message of Message("Found dish with ingredients $ingredients"))
                 }
@@ -25,7 +26,7 @@ fun FindDish(lookup: (DishName) -> Dish?): ContractRoute {
 
     return "/dish" meta {
         queries += dishName
-        summary = "Seach for a recipe"
+        summary = "Search for a recipe"
         returning(Status.OK, message to Message("Found dish with ingredients"))
         returning(Status.NOT_FOUND, message to Message("Unknown dish"))
     } bindContract Method.GET to dishFinder
@@ -34,9 +35,12 @@ fun FindDish(lookup: (DishName) -> Dish?): ContractRoute {
 fun CookDish(): ContractRoute {
     val renderer = ThymeleafTemplates().HotReload("src/main/resources")
     val message = Body.auto<Message>().toLens()
-    return "/cook" meta {
+    val contractRoute: ContractRouteSpec0.Binder = "/cook" meta {
         summary = "Start cooking!"
         returning(Status.OK, message to Message("Start cooking"))
         returning(Status.NOT_FOUND, message to Message("Unknown dish"))
-    } bindContract Method.GET to { CookingServer.cook(renderer) }
+    } bindContract Method.GET
+
+    val handler:HttpHandler = { CookingServer.cook(renderer) }
+    return contractRoute to handler
 }

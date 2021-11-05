@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  cookingapp:
+    image: eclipse-temurin
+    working_dir: /root/code/cookling-with-kotlin
+    command: './gradlew clean build'
+    volumes:
+      - ${PWD}:/root/code/cookling-with-kotlin
+

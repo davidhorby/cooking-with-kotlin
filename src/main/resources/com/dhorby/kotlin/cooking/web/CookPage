@@ -12,11 +12,11 @@
 <p>Welcome to Cooking for Kotlin!</p>
 
 <div>
-    <p th:text="${model.dish}"></p>
+    <p th:text="${model.dishName}"></p>
 </div>
 
 <div>
-    <form action="#" th:action="cook" method="post">
+    <form action="#" th:action="cook" method="get">
        <th:block th:each="ingredient: ${model.allIngredients}">
             <input type="checkbox" th:field="ingredient" name="ingredient" th:value="${ingredient}"/>
             <label th:text="${ingredient}" ></label>

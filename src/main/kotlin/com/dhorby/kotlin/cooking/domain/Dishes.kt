@@ -7,8 +7,14 @@ import com.dhorby.kotlin.cooking.domain.PotatoDish.*
 open class Dish(open val ingredients: Set<Ingredient>) {
     constructor() : this(mutableSetOf<Ingredient>())
 
+    open val dishName:String = "Basic dish"
+
     override fun toString(): String {
         return "${ingredients.joinToString(" and ")}"
+    }
+
+    class Builder {
+
     }
 }
 
@@ -25,19 +31,35 @@ sealed class Either<out A, out B> {
 }
 
 sealed class BakedDish() : Dish(), Baked {
-    class BakedPotato : BakedDish()
-    class BakedPotatoWithCheese : BakedDish()
-    class BakedPotatoWithBeans : BakedDish()
-    class BakedPotatoWithCheeseAndBeans : BakedDish()
+    class BakedPotato : BakedDish() {
+        override val dishName: String = "BakedPotato"
+    }
+    class BakedPotatoWithCheese : BakedDish(){
+        override val dishName: String = "BakedPotatoWithCheese"
+    }
+    class BakedPotatoWithBeans : BakedDish(){
+        override val dishName: String = "BakedPotatoWithBeans"
+    }
+    class BakedPotatoWithCheeseAndBeans : BakedDish() {
+        override val dishName: String = "BakedPotatoWithCheeseAndBeans"
+    }
 }
 
 
 
 sealed class PotatoDish : Dish() {
-    class SimplePotato(override val ingredients:Set<Ingredient>) : PotatoDish()
-    class PotatoWithCheese(override val ingredients:Set<Ingredient>) : PotatoDish()
-    class PotatoWithBeans(override val ingredients:Set<Ingredient>) : PotatoDish()
-    class PotatoWithCheeseAndBeans(override val ingredients:Set<Ingredient>) : PotatoDish()
+    class SimplePotato(override val ingredients:Set<Ingredient>) : PotatoDish() {
+        override val dishName: String = "SimplePotato"
+    }
+    class PotatoWithCheese(override val ingredients:Set<Ingredient>) : PotatoDish() {
+        override val dishName: String = "PotatoWithCheese"
+    }
+    class PotatoWithBeans(override val ingredients:Set<Ingredient>) : PotatoDish() {
+        override val dishName: String = "PotatoWithBeans"
+    }
+    class PotatoWithCheeseAndBeans(override val ingredients:Set<Ingredient>) : PotatoDish() {
+        override val dishName: String = "votatoWithCheeseAndBeans"
+    }
 }
 
 typealias Carrot = Ingredient
@@ -49,8 +71,12 @@ sealed class ChoppedIngredient : Chopped {
 }
 
 
-class NotADish : Dish()
-class NotABakedDish : BakedDish()
+class NotADish : Dish()  {
+    override val dishName: String = "NotADish"
+}
+class NotABakedDish : BakedDish()  {
+    override val dishName: String = "NotABakedDish"
+}
 
 
 enum class Ingredient {

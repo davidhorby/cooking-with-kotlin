@@ -2,6 +2,7 @@ package com.dhorby.kotlin.web.api
 
 import com.dhorby.kotlin.cooking.domain.Dish
 import com.dhorby.kotlin.cooking.domain.DishName
+import com.dhorby.kotlin.cooking.domain.Ingredient
 import com.dhorby.kotlin.cooking.domain.Message
 import com.dhorby.kotlin.cooking.web.CookingServer
 import org.http4k.contract.ContractRoute
@@ -41,6 +42,6 @@ fun CookDish(): ContractRoute {
         returning(Status.NOT_FOUND, message to Message("Unknown dish"))
     } bindContract Method.GET
 
-    val handler:HttpHandler = { CookingServer.cook(renderer) }
+    val handler:HttpHandler = { CookingServer.cook(renderer, ingredientMap = listOf(Ingredient.Cheese, Ingredient.Potato)) }
     return contractRoute to handler
 }

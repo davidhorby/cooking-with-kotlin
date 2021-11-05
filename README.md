@@ -9,7 +9,6 @@ Inspired by the blog:
 ## Dependencies
 brew install --cask temurin
 
-
 ## Build
 ./gradlew clean build
 

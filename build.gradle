@@ -3,7 +3,6 @@ version = "1.0-SNAPSHOT"
 
 buildscript {
     repositories {
-        jcenter()
         mavenCentral()
     }
 
@@ -18,7 +17,6 @@ apply plugin: 'jacoco'
 
 
 repositories {
-    jcenter()
     mavenCentral()
 }
 
@@ -27,15 +25,16 @@ mainClassName = "com.dhorby.kotlin.web.CookingApp"
 dependencies {
     implementation(platform("org.http4k:http4k-bom:$http4k_version"))
 
-    implementation("org.http4k:http4k-core")
-    implementation("org.http4k:http4k-client-okhttp")
-    implementation("org.http4k:http4k-cloudnative")
-    implementation("org.http4k:http4k-contract")
-    implementation("org.http4k:http4k-format-jackson")
-    implementation("org.http4k:http4k-security-oauth")
-    implementation("org.http4k:http4k-server-undertow")
-    implementation("org.http4k:http4k-template-handlebars")
-    implementation("org.http4k:http4k-template-thymeleaf")
+    implementation("org.http4k:http4k-core:$http4k_version")
+    implementation("org.http4k:http4k-client-okhttp:$http4k_version")
+    implementation("org.http4k:http4k-cloudnative:$http4k_version")
+    implementation("org.http4k:http4k-contract:$http4k_version")
+    implementation("org.http4k:http4k-format-jackson:$http4k_version")
+    implementation("org.http4k:http4k-multipart:$http4k_version")
+    implementation("org.http4k:http4k-security-oauth:$http4k_version")
+    implementation("org.http4k:http4k-server-undertow:$http4k_version")
+    implementation("org.http4k:http4k-template-handlebars:$http4k_version")
+    implementation("org.http4k:http4k-template-thymeleaf:$http4k_version")
     implementation("org.apache.commons:commons-text:1.6")
     implementation("com.warrenstrange:googleauth:1.1.2")
 

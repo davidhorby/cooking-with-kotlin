@@ -30,14 +30,14 @@ class DishesTest() {
     inner class Combinations {
         @Test
         fun `it should be possible to create a potato dish`() {
-            val dishUnderTest = Dish() containing Ingredient.Potato
+            val dishUnderTest = Dish() containing Potato
             assertTrue(dishUnderTest is PotatoDish)
             assertTrue(dishUnderTest is SimplePotato)
         }
 
         @Test
         fun `it should be possible to create a potato with cheese dish`() {
-            val dishUnderTest = Dish() containing Ingredient.Potato and Cheese
+            val dishUnderTest = Dish() containing Potato and Cheese
             assertTrue(dishUnderTest is PotatoDish)
             assertTrue(dishUnderTest is PotatoWithCheese)
         }
@@ -97,7 +97,7 @@ class DishesTest() {
         fun `it should be possible to bake a potato with cheese and beans`() {
             val dish = Dish() containing Potato and Cheese and Beans
             val cookedDish = bakeDish(dish)
-            assertTrue(cookedDish is BakedDish.BakedPotatoWithCheeseAndBeans, "The class is not BakedPotatoWithCheeseAndBeans but is ${cookedDish.javaClass}")
+            assertTrue(cookedDish is BakedPotatoWithCheeseAndBeans, "The class is not BakedPotatoWithCheeseAndBeans but is ${cookedDish.javaClass}")
         }
 
         private fun bakeDish(dish: Dish): BakedDish {
